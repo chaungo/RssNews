@@ -1,0 +1,68 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/ex"
+        android:icon="@drawable/ic_expand_more_black_48dp"
+        android:title="Thêm"
+        app:showAsAction="always">
+        <menu>
+
+            <item
+                android:id="@+id/tinmoi"
+                android:orderInCategory="100"
+                android:title="Tin mới nhất"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/thoisu"
+                android:orderInCategory="100"
+                android:title="Thời sự"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/thegioi"
+                android:orderInCategory="100"
+                android:title="Thế giới"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/thethao"
+                android:orderInCategory="100"
+                android:title="Thể thao"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/phapluat"
+                android:orderInCategory="100"
+                android:title="Pháp luật"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/giaoduc"
+                android:orderInCategory="100"
+                android:title="Giáo dục"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/suckhoe"
+                android:orderInCategory="100"
+                android:title="Sức khoẻ"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/doisong"
+                android:orderInCategory="100"
+                android:title="Đời sống"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/dulich"
+                android:orderInCategory="100"
+                android:title="Du lịch"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/khoahoc"
+                android:orderInCategory="100"
+                android:title="Khoa học"
+                app:showAsAction="never" />
+        </menu>
+
+    </item>
+
+
+</menu>

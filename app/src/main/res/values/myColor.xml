@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="accent">#F50056</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="bkg_card">#8C9EFF</color>
+    <color name="themSK_phan_muc">#1aFFFFFF</color>
+    <color name="Amber">#FF5722</color>
+    <color name="MauChu">#ffffff</color>
+    <color name="myYellow">#FFEB3B</color>
+    <color name="xanh">#009688</color>
+    <color name="xanh15">#26009688</color>
+    <color name="den87">#c4000000</color>
+    <color name="den10">#1a000000</color>
+    <color name="den15">#1c000000</color>
+    <color name="den20">#33000000</color>
+    <color name="den50">#80000000</color>
+    <color name="den60">#99000000</color>
+    <color name="trang100">#FFFFFF</color>
+    <color name="trang90">#e6FFFFFF</color>
+    <color name="trang05">#0dFFFFFF</color>
+    <color name="trang10">#1aFFFFFF</color>
+    <color name="trang15">#26FFFFFF</color>
+    <color name="trang40">#66FFFFFF</color>
+    <color name="trang50">#80FFFFFF</color>
+    <color name="trang60">#99FFFFFF</color>
+    <color name="trang70">#b3FFFFFF</color>
+    <color name="trang80">#ccFFFFFF</color>
+    <color name="myCyan">#00838F</color>
+    <color name="myCyan50">#8000838F</color>
+    <color name="myCyan70">#b300838F</color>
+    <color name="myCyan80">#cc00838F</color>
+    <color name="myDeeperCyan">#006064</color>
+    <color name="myBrighterCyan">#0097A7</color>
+
+    <color name="myBlue">#2196F3</color>
+    <color name="BGrey">#263238</color>
+    <color name="DGrey">#212121</color>
+
+
+
+
+
+</resources>
