@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_tong"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,9 +24,9 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView19">
+        android:layout_alignParentStart="true">
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"
@@ -46,59 +47,25 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginRight="35dp"
-            android:layout_marginBottom="35dp"
-            android:visibility="gone">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|bottom">
 
-            <FrameLayout
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/refresh_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:foregroundGravity="center" >
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="30dp"
+                android:clickable="true"
+                android:foregroundGravity="center"
+                android:visibility="gone"
+                app:elevation="5dp"
+                app:fabSize="normal"
+                app:srcCompat="@drawable/ic_replay_white_48dp" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="2dp"
-                    android:src="@drawable/ic_brightness_1_grey600_48dp" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_lens_orange600_48dp" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="1dp"
-                    android:src="@drawable/ic_replay_grey600_48dp" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_replay_white_48dp" />
-            </FrameLayout>
         </RelativeLayout>
 
         <TextView
@@ -111,6 +78,8 @@
             android:textColor="@color/Amber"
             android:textStyle="bold"
             android:textSize="18sp" />
+
+
 
     </FrameLayout>
 

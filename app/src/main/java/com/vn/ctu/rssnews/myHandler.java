@@ -34,9 +34,8 @@ public class myHandler extends DefaultHandler {
         // TODO Auto-generated method stub
         super.startElement(uri, localName, qName, attributes);
 
-        //temp = new StringBuilder();
+        temp = "";
         if (qName.equalsIgnoreCase("item")) {
-
             rssitem = new RssItem();
             itemfound = true;
         }

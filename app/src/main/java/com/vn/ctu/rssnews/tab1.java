@@ -1,12 +1,10 @@
 package com.vn.ctu.rssnews;
 
 import android.app.Activity;
-import android.content.Context;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,21 +19,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.xml.sax.InputSource;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Scanner;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -47,7 +39,7 @@ public class tab1 extends Fragment {
     ListView listView;
     TextView textView, textView_er;
     ProgressBar progressBar;
-    RelativeLayout relativeLayout;
+    FloatingActionButton refresh_button;
     Animation open, close;
     ArrayList<RssItem> list;
     Location location;
@@ -57,32 +49,28 @@ public class tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.tab1, container, false);
 
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
-
         textView = (TextView) root.findViewById(R.id.textView19);
         textView_er = (TextView) root.findViewById(R.id.textView_er);
         progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
         listView = (ListView) root.findViewById(R.id.listView);
-        relativeLayout = (RelativeLayout) root.findViewById(R.id.relativeLayout);
+        refresh_button = (FloatingActionButton) root.findViewById(R.id.refresh_button);
         open = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_slide_in_bottom);
         close = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_slide_out_bottom);
 
         textView.setText(MainActivity.chude);
-        relativeLayout.setOnClickListener(new View.OnClickListener() {
+        refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new layThongTinThoiTiet().execute(location.getLatitude() + "", location.getLongitude() + "");
-                relativeLayout.startAnimation(close);
-                relativeLayout.setVisibility(View.GONE);
+                new getRss().execute(MainActivity.Rssurl);
+                refresh_button.startAnimation(close);
+                refresh_button.setVisibility(View.GONE);
                 textView_er.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 listView.setVisibility(View.GONE);
             }
         });
 
-        new layThongTinThoiTiet().execute(location.getLatitude() + "", location.getLongitude() + "");
+        new getRss().execute(MainActivity.Rssurl);
 
         return root;
     }
@@ -114,6 +102,7 @@ public class tab1 extends Fragment {
                                 + "Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
                 SAXParserFactory fac = SAXParserFactory.newInstance();
                 SAXParser paser = fac.newSAXParser();
+                list = new ArrayList<>();
                 myHandler myHandler = new myHandler(list);
                 paser.parse(new InputSource(conn.getInputStream()), myHandler);
 
@@ -139,8 +128,8 @@ public class tab1 extends Fragment {
                 listView.setAdapter(listAdapter);
                 progressBar.setVisibility(View.GONE);
                 listView.setVisibility(View.VISIBLE);
-                relativeLayout.startAnimation(open);
-                relativeLayout.setVisibility(View.VISIBLE);
+                refresh_button.startAnimation(open);
+                refresh_button.setVisibility(View.VISIBLE);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -151,13 +140,13 @@ public class tab1 extends Fragment {
                         MainActivity.viewPager.setCurrentItem(1);
                     }
                 });
-                new getHTML().execute(list.get(0).getLink());
+                //new getHTML().execute(list.get(0).getLink());
             } else {
                 Toast.makeText(getActivity(), "Không thể kết nối!, vui lòng kiểm tra mạng", Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
                 textView_er.setVisibility(View.VISIBLE);
-                relativeLayout.startAnimation(open);
-                relativeLayout.setVisibility(View.VISIBLE);
+                refresh_button.startAnimation(open);
+                refresh_button.setVisibility(View.VISIBLE);
 
             }
 
@@ -190,7 +179,7 @@ public class tab1 extends Fragment {
                 System.out.println("Loi lay HTML: " + ex.toString());
                 try {
                     e = doc.select("div#video_left").first();
-                } catch (Error eee) {
+                } catch (Exception eee) {
                     return "Lỗi! Không thể hiển thị trang web. Xin thử lại.";
                 }
             }
@@ -229,83 +218,83 @@ public class tab1 extends Fragment {
     }
 
 
-    class layThongTinThoiTiet extends AsyncTask<String, Integer, String> {
-
-        URL url = null;
-        String wurl = "http://api.openweathermap.org/data/2.5/weather?lat=";
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                url = new URL(wurl + params[0] + "&lon=" + params[1]);
-                System.out.println(url.toString());
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setDoInput(true);
-
-                //Ket noi
-                connection.connect();
-
-                //Đọc dữ liệu
-                InputStream inputStream = connection.getInputStream();
-                Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
-
-                String kq = scanner.hasNext() ? scanner.next() : "";
-                inputStream.close();
-
-
-                JSONObject jsonObject = new JSONObject(kq);
-                String name = jsonObject.getString("name");
-                String nuoc = jsonObject.getJSONObject("sys").getString("country");
-                System.out.println(name + ", " + nuoc);
-                String tt = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
-
-                JSONObject main = jsonObject.getJSONObject("main");
-                Double nhietdo = main.getDouble("temp") - 273.15;
-                Double nhietdocaonhat = main.getDouble("temp_max") - 273.15;
-                Double nhietdothapnhat = main.getDouble("temp_min") - 273.15;
-                String doam = main.getString("humidity") + "%";
-
-                RssItem item = new RssItem();
-                item.setTitle(name + ", " + nuoc);
-                item.setSummary(tt + ". Nhiệt độ: " + nhietdo.toString().substring(0, 6) + ", cao nhất: " + nhietdocaonhat.toString().substring(0, 6) + ", thấp nhất: " + nhietdothapnhat.toString().substring(0, 6) + ". Độ ẩm: " + doam);
-
-                Calendar calendar = Calendar.getInstance(Locale.getDefault());
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH) + 1;
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int gio = calendar.get(Calendar.HOUR_OF_DAY);
-                int phut = calendar.get(Calendar.MINUTE);
-
-                item.setPubDate(year + ", " + month + ", " + day + ", " + gio + ", " + phut);
-                //item.setLink("http://api.openweathermap.org/data/2.5/weather?q=" + name.replace(" ", "+") + "&mode=html");
-                item.setLink("");
-                System.out.println("http://api.openweathermap.org/data/2.5/weather?q=" + name.replace(" ", "+") + "&mode=html");
-                item.setImageURL(myHandler.getBitmapFromURL("http://openweathermap.org/img/w/" + jsonObject.getJSONArray("weather").getJSONObject(0).getString("icon") + ".png"));
-                list = new ArrayList<>();
-
-                list.add(item);
-
-                System.out.println("Da them");
-
-
-                return null;
-            } catch (Exception e) {
-
-            }
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            new getRss().execute(MainActivity.Rssurl);
-
-
-        }
-    }
+//    class layThongTinThoiTiet extends AsyncTask<String, Integer, String> {
+//
+//        URL url = null;
+//        String wurl = "http://api.openweathermap.org/data/2.5/weather?lat=";
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            try {
+//                url = new URL(wurl + params[0] + "&lon=" + params[1]);
+//                System.out.println(url.toString());
+//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                connection.setRequestMethod("GET");
+//                connection.setDoInput(true);
+//
+//                //Ket noi
+//                connection.connect();
+//
+//                //Đọc dữ liệu
+//                InputStream inputStream = connection.getInputStream();
+//                Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
+//
+//                String kq = scanner.hasNext() ? scanner.next() : "";
+//                inputStream.close();
+//
+//
+//                JSONObject jsonObject = new JSONObject(kq);
+//                String name = jsonObject.getString("name");
+//                String nuoc = jsonObject.getJSONObject("sys").getString("country");
+//                System.out.println(name + ", " + nuoc);
+//                String tt = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
+//
+//                JSONObject main = jsonObject.getJSONObject("main");
+//                Double nhietdo = main.getDouble("temp") - 273.15;
+//                Double nhietdocaonhat = main.getDouble("temp_max") - 273.15;
+//                Double nhietdothapnhat = main.getDouble("temp_min") - 273.15;
+//                String doam = main.getString("humidity") + "%";
+//
+//                RssItem item = new RssItem();
+//                item.setTitle(name + ", " + nuoc);
+//                item.setSummary(tt + ". Nhiệt độ: " + nhietdo.toString().substring(0, 6) + ", cao nhất: " + nhietdocaonhat.toString().substring(0, 6) + ", thấp nhất: " + nhietdothapnhat.toString().substring(0, 6) + ". Độ ẩm: " + doam);
+//
+//                Calendar calendar = Calendar.getInstance(Locale.getDefault());
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH) + 1;
+//                int day = calendar.get(Calendar.DAY_OF_MONTH);
+//                int gio = calendar.get(Calendar.HOUR_OF_DAY);
+//                int phut = calendar.get(Calendar.MINUTE);
+//
+//                item.setPubDate(year + ", " + month + ", " + day + ", " + gio + ", " + phut);
+//                //item.setLink("http://api.openweathermap.org/data/2.5/weather?q=" + name.replace(" ", "+") + "&mode=html");
+//                item.setLink("");
+//                System.out.println("http://api.openweathermap.org/data/2.5/weather?q=" + name.replace(" ", "+") + "&mode=html");
+//                item.setImageURL(myHandler.getBitmapFromURL("http://openweathermap.org/img/w/" + jsonObject.getJSONArray("weather").getJSONObject(0).getString("icon") + ".png"));
+//
+//                list = new ArrayList<>();
+//                list.add(item);
+//
+//                System.out.println("Da them");
+//
+//
+//                return null;
+//            } catch (Exception e) {
+//
+//            }
+//            return null;
+//        }
+//
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//
+//            new getRss().execute(MainActivity.Rssurl);
+//
+//
+//        }
+//    }
 
 
 }

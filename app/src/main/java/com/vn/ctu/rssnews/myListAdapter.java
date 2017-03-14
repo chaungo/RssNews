@@ -29,7 +29,11 @@ public class myListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        if (list != null) {
+            return list.size();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -58,9 +62,9 @@ public class myListAdapter extends BaseAdapter {
         holder.textView_xemtruoc.setText(item.getSummary() + "");
         holder.textView_tg.setText(item.getPubDate() + "");
 
-        if(item.getImage()==null){
+        if (item.getImage() == null) {
             holder.imageView.setVisibility(View.GONE);
-        }else {
+        } else {
             holder.imageView.setImageBitmap(item.getImage());
         }
 
