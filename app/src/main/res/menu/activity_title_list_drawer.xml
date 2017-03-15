@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/tinmoi"
+            android:orderInCategory="100"
+            android:title="Tin mới nhất" />
+        <item
+            android:id="@+id/thoisu"
+            android:orderInCategory="100"
+            android:title="Thời sự" />
+        <item
+            android:id="@+id/thegioi"
+            android:orderInCategory="100"
+            android:title="Thế giới" />
+        <item
+            android:id="@+id/thethao"
+            android:orderInCategory="100"
+            android:title="Thể thao" />
+        <item
+            android:id="@+id/phapluat"
+            android:orderInCategory="100"
+            android:title="Pháp luật" />
+        <item
+            android:id="@+id/giaoduc"
+            android:orderInCategory="100"
+            android:title="Giáo dục" />
+        <item
+            android:id="@+id/suckhoe"
+            android:orderInCategory="100"
+            android:title="Sức khoẻ" />
+        <item
+            android:id="@+id/doisong"
+            android:orderInCategory="100"
+            android:title="Đời sống" />
+        <item
+            android:id="@+id/dulich"
+            android:orderInCategory="100"
+            android:title="Du lịch" />
+        <item
+            android:id="@+id/khoahoc"
+            android:orderInCategory="100"
+            android:title="Khoa học" />
+    </group>
+
+</menu>
