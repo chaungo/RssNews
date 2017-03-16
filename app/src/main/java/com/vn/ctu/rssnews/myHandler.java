@@ -1,10 +1,7 @@
 package com.vn.ctu.rssnews;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,15 +9,17 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 
 public class myHandler extends DefaultHandler {
-    public ArrayList<RssItem> rss;
-    RssItem rssitem;
-    boolean itemfound;
-    String temp;
+    ArrayList<RssItem> rss;
+    private RssItem rssitem;
+    private boolean itemfound;
+    private String temp;
     private StringBuilder text;
 
     public myHandler(ArrayList<RssItem> list) {
@@ -28,10 +27,26 @@ public class myHandler extends DefaultHandler {
         this.text = new StringBuilder();
     }
 
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            connection.disconnect();
+
+            return myBitmap;
+        } catch (Exception e) {
+            System.out.println("LOI GETBITMAP: " + e.toString());
+            return null;
+        }
+    }
+
     @Override
     public void startElement(String uri, String localName, String qName,
                              Attributes attributes) throws SAXException {
-        // TODO Auto-generated method stub
         super.startElement(uri, localName, qName, attributes);
 
         temp = "";
@@ -49,13 +64,13 @@ public class myHandler extends DefaultHandler {
             if (!qName.equalsIgnoreCase("item")) {
                 if (itemfound) {
                     if (qName.equalsIgnoreCase("title")) {
-                        rssitem.title = temp;
+                        rssitem.setTitle(temp);
                     } else {
                         if (qName.equalsIgnoreCase("link")) {
-                            rssitem.link = temp;
+                            rssitem.setLink(temp);
                         } else {
                             if (qName.equalsIgnoreCase("pubDate")) {
-                                rssitem.pubDate = temp.replace("+0700", "");
+                                rssitem.setPubDate(temp.replace("+0700", ""));
                             } else {
                                 if (qName.equalsIgnoreCase("description")) {
                                     //rssitem.summary = temp;
@@ -66,12 +81,12 @@ public class myHandler extends DefaultHandler {
                                         imgURL = doc.select("img").first().attr("src");
                                     } catch (Exception e) {
                                         System.out.println("LOI LAY URL: " + e.toString() + " " + temp);
-                                        rssitem.image = null;
-                                    }
-                                    System.out.println(imgURL);
-                                    rssitem.image = getBitmapFromURL(imgURL);
 
-                                    rssitem.summary = temp.substring(temp.indexOf("</a></br>") + 9);
+                                    }
+                                    //System.out.println(imgURL);
+                                    rssitem.setImgUrl(imgURL);
+
+                                    rssitem.setSummary(temp.substring(temp.indexOf("</a></br>") + 9));
 
 
                                 }
@@ -91,6 +106,8 @@ public class myHandler extends DefaultHandler {
         this.text.setLength(0);
     }
 
+    // download hinh va tao lai doi tuong bitmap
+
     @Override
     public void characters(char[] ch, int start, int length)
             throws SAXException {
@@ -99,27 +116,8 @@ public class myHandler extends DefaultHandler {
         //temp = new String(ch, start, length);
         this.text.append(ch, start, length);
         temp = text.toString();
-        System.out.println(temp);
+        //System.out.println(temp);
 
-    }
-
-    // download hinh va tao lai doi tuong bitmap
-
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            connection.disconnect();
-
-            return myBitmap;
-        } catch (Exception e) {
-            System.out.println("LOI GETBITMAP: " + e.toString());
-            return null;
-        }
     }
 
 }

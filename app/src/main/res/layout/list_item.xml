@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@android:drawable/dialog_holo_light_frame"
+    android:orientation="vertical"
 
     >
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="5dp">
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/imageView"
-            android:layout_gravity="center"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center" />
 
         <TextView
+            android:id="@+id/textView_tieude"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Tieu de"
-            android:id="@+id/textView_tieude"
-            android:textSize="20sp"
-            android:textColor="#ff000000"
-            android:textStyle="bold"
-            android:layout_below="@+id/imageView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:gravity="center"
+            android:text="Tieu de"
+            android:textColor="#ff000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/textView_xemtruoc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Xem truoc"
-            android:id="@+id/textView_xemtruoc"
-            android:textColor="#ff000000"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="right"
-            android:textSize="18sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:text="Xem truoc"
+            android:textColor="#ff000000"
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/textView_tg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thoi gian"
-            android:id="@+id/textView_tg"
-            android:textColor="#c4000000"
-            android:padding="5dp"
-            android:textStyle="italic"
-            android:layout_below="@+id/textView_xemtruoc"
-            android:layout_alignRight="@+id/textView_xemtruoc"
             android:layout_alignEnd="@+id/textView_xemtruoc"
-            android:layout_gravity="right" />
+            android:layout_alignRight="@+id/textView_xemtruoc"
+            android:layout_below="@+id/textView_xemtruoc"
+            android:layout_gravity="right"
+            android:padding="5dp"
+            android:text="Thoi gian"
+            android:textColor="#c4000000"
+            android:textStyle="italic" />
     </LinearLayout>
 
 </RelativeLayout>

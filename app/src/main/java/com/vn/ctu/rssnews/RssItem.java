@@ -3,11 +3,11 @@ package com.vn.ctu.rssnews;
 import android.graphics.Bitmap;
 
 public class RssItem {
-    String title;
-    String link;
-    String pubDate;
-    String summary;
-    Bitmap image;
+    private String title;
+    private String link;
+    private String pubDate;
+    private String summary;
+    private String imgUrl;
 
     public RssItem() {
         super();
@@ -20,7 +20,6 @@ public class RssItem {
         this.link = link;
         this.pubDate = pubDate;
         this.summary = summary;
-        this.image = image;
     }
 
     public String getTitle() {
@@ -55,11 +54,13 @@ public class RssItem {
         this.summary = summary;
     }
 
-    public Bitmap getImage() {
-        return image;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImageURL(Bitmap image) {
-        this.image = image;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
+
+

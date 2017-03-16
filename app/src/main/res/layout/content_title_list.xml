@@ -23,14 +23,14 @@
             android:indeterminate="true" />
 
         <ListView
+            android:id="@+id/listView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/listView"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:visibility="gone"
-            android:divider="@null" />
+            android:divider="@null"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -54,19 +54,6 @@
                 app:srcCompat="@drawable/ic_replay_white_48dp" />
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/textView_er"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Vui lòng kiểm tra mạng"
-            android:textColor="@color/Amber"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-
 
     </FrameLayout>
 
