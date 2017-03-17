@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1087906221014",
+    "firebase_url": "https://rssnews-ad114.firebaseio.com",
+    "project_id": "rssnews-ad114",
+    "storage_bucket": "rssnews-ad114.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087906221014:android:7df6d92e3373844d",
+        "android_client_info": {
+          "package_name": "nnmc.rssnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087906221014-hqs2kv344sima4bc0npbaim989peakc9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nnmc.rssnews",
+            "certificate_hash": "1001a3381f31e07ae350cb53feaee5b09b3334d0"
+          }
+        },
+        {
+          "client_id": "1087906221014-o144ujpifccka4m9p400fkrn81tk4gte.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nnmc.rssnews",
+            "certificate_hash": "1e17a1c7cede32e57b9b3c19c72f7156bb3a32c7"
+          }
+        },
+        {
+          "client_id": "1087906221014-hm7hvqg3sp7mdahc06s75ief68u888ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl60DeREc2xHcm_S7_nHilqp2phjSzKt0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087906221014-hm7hvqg3sp7mdahc06s75ief68u888ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
