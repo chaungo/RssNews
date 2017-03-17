@@ -27,22 +27,22 @@ public class myHandler extends DefaultHandler {
         this.text = new StringBuilder();
     }
 
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            connection.disconnect();
-
-            return myBitmap;
-        } catch (Exception e) {
-            System.out.println("LOI GETBITMAP: " + e.toString());
-            return null;
-        }
-    }
+//    public static Bitmap getBitmapFromURL(String src) {
+//        try {
+//            URL url = new URL(src);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setDoInput(true);
+//            connection.connect();
+//            InputStream input = connection.getInputStream();
+//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+//            connection.disconnect();
+//
+//            return myBitmap;
+//        } catch (Exception e) {
+//            System.out.println("LOI GETBITMAP: " + e.toString());
+//            return null;
+//        }
+//    }
 
     @Override
     public void startElement(String uri, String localName, String qName,
