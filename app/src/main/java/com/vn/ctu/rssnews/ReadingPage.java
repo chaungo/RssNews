@@ -32,14 +32,13 @@ public class ReadingPage extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webView);
 
         webView.setWebViewClient(new WebViewClient());
-        webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAppCacheEnabled(true);
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setSupportZoom(true);
-//        webView.getSettings().setAllowFileAccess(true);
-//        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        //webView.loadUrl(link);
+        webView.getSettings().setBuiltInZoomControls(true);
+
+
         new getHTML().execute(link);
 
 
@@ -49,25 +48,33 @@ public class ReadingPage extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            String loi = "<center>" + getString(R.string.connection_issue) + "</center>";
+
             Document doc = null;
             Element e = null;
-            //String html = new String();
-            System.out.println(params[0]);
 
             try {
-
                 doc = Jsoup.connect(params[0]).get();
-                e = doc.select("div#container").first();
-                e.html();
-
             } catch (Exception ex) {
-                System.out.println("Loi lay HTML: " + ex.toString());
-                try {
-                    e = doc.select("div#video_left").first();
-                } catch (Exception eee) {
-                    return "<center>Vui lòng kiểm tra kết nối và thử lại</center>";
-                }
+                System.out.println(ex);
             }
+
+            if (doc != null) {
+                try {
+                    e = doc.select("div#container").first();
+                    e.html();
+                } catch (Exception ex) {
+                    try {
+                        e = doc.select("div#video_left").first();
+                    } catch (Exception eee) {
+                        return loi;
+                    }
+                }
+            } else {
+                return loi;
+            }
+
+
             try {
                 e.select("a").remove();
             } catch (Exception ee) {
@@ -135,6 +142,8 @@ public class ReadingPage extends AppCompatActivity {
             }
 
             return e.html();
+
+
         }
 
         @Override
@@ -144,8 +153,8 @@ public class ReadingPage extends AppCompatActivity {
                 String css = "<style type='text/css'>img {height: auto ;max-width: 100%;}</style>";
                 webView.setVisibility(View.VISIBLE);
                 webView.loadData(css + result, "text/html; charset=utf-8", "UTF-8");
-            } catch (Error er) {
-            } catch (Exception e) {
+            } catch (Error | Exception er) {
+                System.out.println(er);
             }
 
         }

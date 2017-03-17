@@ -18,7 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.xml.sax.InputSource;
@@ -129,52 +128,52 @@ public class TitleList extends AppCompatActivity
         switch (id) {
             case R.id.tinmoi: {
                 Rssurl = "http://vnexpress.net/rss/tin-moi-nhat.rss";
-                chude = "Tin mới nhất";
+                chude = getString(R.string.tinmoi);
                 break;
             }
             case R.id.thoisu: {
                 Rssurl = "http://vnexpress.net/rss/thoi-su.rss";
-                chude = "Thời sự";
+                chude = getString(R.string.thoisu);
                 break;
             }
             case R.id.thegioi: {
                 Rssurl = "http://vnexpress.net/rss/the-gioi.rss";
-                chude = "Thế giới";
+                chude = getString(R.string.thegioi);
                 break;
             }
             case R.id.thethao: {
                 Rssurl = "http://vnexpress.net/rss/the-thao.rss";
-                chude = "Thể thao";
+                chude =  getString(R.string.thethao);
                 break;
             }
             case R.id.phapluat: {
                 Rssurl = "http://vnexpress.net/rss/phap-luat.rss";
-                chude = "Pháp luật";
+                chude =  getString(R.string.phapluat);
                 break;
             }
             case R.id.giaoduc: {
                 Rssurl = "http://vnexpress.net/rss/giao-duc.rss";
-                chude = "Giáo dục";
+                chude =  getString(R.string.giaoduc);
                 break;
             }
             case R.id.suckhoe: {
                 Rssurl = "http://vnexpress.net/rss/suc-khoe.rss";
-                chude = "Sức khoẻ";
+                chude =  getString(R.string.suckhoe);
                 break;
             }
             case R.id.doisong: {
                 Rssurl = "http://vnexpress.net/rss/doi-song.rss";
-                chude = "Đời sống";
+                chude =  getString(R.string.doisong);
                 break;
             }
             case R.id.dulich: {
                 Rssurl = "http://vnexpress.net/rss/du-lich.rss";
-                chude = "Du lịch";
+                chude =  getString(R.string.dulich);
                 break;
             }
             case R.id.khoahoc: {
                 Rssurl = "http://vnexpress.net/rss/khoa-hoc.rss";
-                chude = "Khoa học";
+                chude =  getString(R.string.khoahoc);
                 break;
             }
             default:
@@ -257,7 +256,7 @@ public class TitleList extends AppCompatActivity
                 });
 
             } else {
-                Toast.makeText(getApplicationContext(), "Vui lòng kiểm tra kết nối", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.connection_issue), Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
                 refresh_button.startAnimation(open);
                 refresh_button.setVisibility(View.VISIBLE);
